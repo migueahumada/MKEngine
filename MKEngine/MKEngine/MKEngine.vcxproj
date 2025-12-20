@@ -109,12 +109,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)MKEngine\inc;$(SolutionDir)MKUtils\inc;$(SolutionDir)MKGraphicsDX12\inc;D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MKCore\inc;$(SolutionDir)MKEngine\inc;$(SolutionDir)MKUtils\inc;$(SolutionDir)MKGraphicsDX12\inc;D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL3.lib;MKGraphicsDX12.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3.lib;MKGraphicsDX12.lib;MKCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\bin\Debug;D:\Coding\C++\MKEngine\MKEngine\x64\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -126,13 +126,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)MKEngine\inc;$(SolutionDir)MKUtils\inc;$(SolutionDir)MKGraphicsDX12\inc;D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MKCore\inc;$(SolutionDir)MKEngine\inc;$(SolutionDir)MKUtils\inc;$(SolutionDir)MKGraphicsDX12\inc;D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL3.lib;MKGraphicsDX12.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\bin\Release;D:\Coding\C++\MKEngine\MKEngine\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;MKGraphicsDX12.lib;MKCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Coding\C++\MKEngineDependencies\SDL_3.2.4\bin\Release;D:\Coding\C++\MKEngine\MKEngine\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="inc\DummyAPI.h" />
     <ClInclude Include="inc\PrerequisitesUtils.h" />
     <ClInclude Include="inc\Singleton.h" />
   </ItemGroup>

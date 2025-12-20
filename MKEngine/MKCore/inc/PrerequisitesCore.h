@@ -37,6 +37,8 @@ using Array = std::array<T, N>;
 template<class T>
 using Vector = std::vector<T>;
 
+using MK_GUID = uint64_t;
+
 template<typename Num>
 Num clamp(Num value, Num min, Num max)
 {

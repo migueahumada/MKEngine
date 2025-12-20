@@ -2,11 +2,12 @@
 #define SDL_MAIN_NOIMPL
 #include "Application.h"
 
+
 int main()
 {
    Application app;
-   
-   app.run();
+
+   app.Run();
 
    return 0;
 }

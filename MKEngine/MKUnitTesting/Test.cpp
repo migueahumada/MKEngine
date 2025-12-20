@@ -1,20 +1,13 @@
 
-#include "Singleton.h"
+#include "DummyAPI.h"
 #include <iostream>
-
-
 
 int main()
 {
-  Singleton::StartUp();
   
-  std::cout << Singleton::GetInstance().getNum() << std::endl;
 
-  std::cout << Singleton::GetInstance().getBool() << std::endl;
-
-  g_Singleton().getBool();
-
-  Singleton::Shutdown();
+  DummyAPI::StartUp();
+  DummyAPI::Shutdown();
 
   return 0;
 }

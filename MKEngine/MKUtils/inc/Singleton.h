@@ -1,48 +1,45 @@
 #pragma once
 #include "PrerequisitesUtils.h"
 #include <cassert>
+#include <utility>
 
 /**
 * Simple Singleton template class
 */
-
-class MK_UTILS_API Singleton {
+template<class T>
+class Singleton {
 
  public:
 
-  static void StartUp()
+  template <typename... Args>
+  static void StartUp(Args&& ... args)
   {
     assert(!IsStarted() && "Singleton was already started");
 
-    Instance() = new Singleton;
-
+    Instance() = new T(std::forward<Args>(args)...);
     IsStarted() = true;
+
+    static_cast<Singleton*>(Instance())->OnStartup();
+
+
   }
+
+  virtual void OnStartup() = 0;
+  virtual void OnShutdown() = 0;
 
   static void Shutdown()
   {
     assert(IsStarted() && "Singleton was not started");
 
+    
+    static_cast<Singleton*>(Instance())->OnShutdown();
     delete Instance();
-    Instance() = nullptr;
-
     IsStarted() = false;
-
   }
 
-  static Singleton& GetInstance()
+  static T& GetInstance()
   {
     return *Instance();
-  }
-
-  int getNum()
-  {
-    return m_num;
-  }
-
-  int getBool()
-  {
-    return asdf;
   }
 
  protected:
@@ -56,16 +53,16 @@ class MK_UTILS_API Singleton {
   Singleton& operator=(const Singleton&) = delete; //NO copy construct
   Singleton& operator=(Singleton&&) = delete; //NO move construct
 
-  static Singleton*& Instance()
-  {
-    static Singleton* inst = nullptr;
-    return inst;
-  }
-
   static bool& IsStarted()
   {
     static bool isStarted = false;
     return isStarted;
+  }
+
+  static T*& Instance()
+  {
+    static T* inst = nullptr;
+    return inst;
   }
 
   int m_num = 34;
@@ -74,7 +71,3 @@ class MK_UTILS_API Singleton {
   
 };
 
-Singleton& g_Singleton()
-{
-  return Singleton::GetInstance();
-}

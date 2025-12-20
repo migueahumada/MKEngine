@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\Object.h" />
     <ClInclude Include="inc\PrerequisitesCore.h" />
+    <ClInclude Include="inc\SceneObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\SceneObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

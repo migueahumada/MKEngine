@@ -2,5 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="inc\PrerequisitesCore.h" />
+    <ClInclude Include="inc\Object.h" />
+    <ClInclude Include="inc\SceneObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\SceneObject.cpp" />
   </ItemGroup>
 </Project>
