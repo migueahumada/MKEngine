@@ -7,6 +7,7 @@
     <ClInclude Include="inc\Prerequisites.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="inc\DX12GraphicsAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -17,5 +18,6 @@
     <ClCompile Include="src\GraphicsDevice.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\DX12GraphicsAPI.cpp" />
   </ItemGroup>
 </Project>

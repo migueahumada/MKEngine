@@ -33,15 +33,3 @@ using Array = std::array<T, N>;
 
 template<class T>
 using Vector = std::vector<T>;
-
-template<typename Num>
-Num clamp(Num value, Num min, Num max)
-{
-	static_assert(std::is_arithmetic<Num>::value);
-
-	if (value >= max) return max;
-	if (value <= min) return min;
-
-	return value;
-
-}

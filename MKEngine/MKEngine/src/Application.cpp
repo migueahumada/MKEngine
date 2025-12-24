@@ -1,5 +1,6 @@
 #include "Application.h"
 #include <SDL3/SDL_time.h>
+#include "DX12GraphicsAPI.h"
 
 Application::Application()
 {
@@ -17,7 +18,7 @@ void Application::Run()
   Uint64 currentTime = 0;
   Init();
 
-  while (!isFinished)
+  while (!m_isFinished)
   {
     //Start of frame
     currentTime = SDL_GetPerformanceCounter();
@@ -43,6 +44,8 @@ void Application::Run()
 
   }
 
+  Shutdown();
+
 }
 
 void Application::Init()
@@ -60,8 +63,11 @@ void Application::Init()
     printf("Error Creating SDL Window");
   }
 
-  HWND handle = (HWND)SDL_GetPointerProperty(SDL_GetWindowProperties(m_window), SDL_PROP_WINDOW_WIN32_HWND_POINTER, nullptr);
+  void* handle = SDL_GetPointerProperty(SDL_GetWindowProperties(m_window), SDL_PROP_WINDOW_WIN32_HWND_POINTER, nullptr);
 
+  DX12GraphicsAPI::StartUp(handle);
+
+  //////
   
 
 }
@@ -75,4 +81,9 @@ void Application::Update(float deltaTime)
 void Application::Render()
 {
 
+}
+
+void Application::Shutdown()
+{
+  DX12GraphicsAPI::ShutDown();
 }

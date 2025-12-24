@@ -1,25 +1,22 @@
 #pragma once
+#include "PrerequisitesUtils.h"
+#include "Subsystem.h"
 
-#include "Singleton.h"
-
-class MK_UTILS_API DummyAPI : public Singleton<DummyAPI>
+class MK_UTILS_API DummyAPI : public Subsystem<DummyAPI>
 {
-public:
-  DummyAPI() {}
+ public:
+  explicit DummyAPI(int num);
+  virtual ~DummyAPI() = default;
+ 
+  inline int getNum(){ return m_num;}
+   
+ protected:
+  
+   virtual void OnStartUp() override;
+   virtual void OnShutDown() override;
 
-  virtual ~DummyAPI() {}
-
-  virtual void OnStartup() override
-  {
-    
-  }
-  virtual void OnShutdown() override
-  {
-    
-  }
-
-
-
-private:
-
+  int m_num = 2;
 };
+
+DummyAPI& g_dummyAPI();
+

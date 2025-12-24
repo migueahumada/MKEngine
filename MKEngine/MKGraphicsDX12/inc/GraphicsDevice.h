@@ -11,7 +11,6 @@ class MK_DX12_API GraphicsDevice
     if (m_device)
     {
       m_device->Release();
-      m_device = nullptr;
     }
   }
 
@@ -20,9 +19,7 @@ class MK_DX12_API GraphicsDevice
     return &m_device;
   }
 
-  
-
- private:
+ protected:
   ID3D12Device* m_device = nullptr;
 };
 

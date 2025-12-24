@@ -128,8 +128,10 @@
     <ClInclude Include="inc\DummyAPI.h" />
     <ClInclude Include="inc\PrerequisitesUtils.h" />
     <ClInclude Include="inc\Singleton.h" />
+    <ClInclude Include="inc\Subsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DummyAPI.cpp" />
     <ClCompile Include="src\IncludeHelpers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

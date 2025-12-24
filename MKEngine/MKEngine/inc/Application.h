@@ -36,12 +36,13 @@ class Application
   void Init();
   void Update(float deltaTime);
   void Render();
+  void Shutdown();
 
   SDL_Window* m_window = nullptr;
   const char* m_windowTitle = "MK Engine";
   const uint16 m_height = 720;
   const uint16 m_width = 1080;
-  bool isFinished = false;
+  bool m_isFinished = false;
   
 };
 

@@ -6,6 +6,7 @@
 /**
 * Simple Singleton template class
 */
+/*
 template<class T>
 class Singleton {
 
@@ -69,5 +70,57 @@ class Singleton {
   bool asdf = false;
 
   
-};
+};*/
 
+/*
+* El problema del singleton es que hace ahuevo 
+* solo existe una instancia de esa clase.
+*/
+
+template <class A>
+class System 
+{
+ public:
+
+  template <typename... Args>
+  static void StartUp(Args&&... args)
+  {
+    if (true)
+    {
+
+    }
+    Instance() = new A(std::forward<Args>(args)...);
+    
+  }
+
+  static void ShutDown()
+  {
+    delete Instance();
+    Instance() = nullptr;
+  }
+
+  static A& GetInstace()
+  {
+    return *Instance();
+  }
+  
+
+ protected:
+  
+   System() = default;
+   virtual ~System() = default;
+
+  static A*& Instance()
+  {
+    static A* m_instance = nullptr;
+    return m_instance;
+  }
+
+  
+
+  static bool IsStarted()
+  {
+    return Instance() ? true : false;
+  }
+
+};
