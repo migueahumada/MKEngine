@@ -1,4 +1,5 @@
 #include "DX12GraphicsAPI.h"
+#include "mkD3D12DescriptorHeap.h"
 
 DX12GraphicsAPI::DX12GraphicsAPI(void* hWnd) : m_hWnd(hWnd)
 {
@@ -7,7 +8,6 @@ DX12GraphicsAPI::DX12GraphicsAPI(void* hWnd) : m_hWnd(hWnd)
 
 void DX12GraphicsAPI::OnStartUp()
 {
-  HRESULT hr;
 
   UINT dxgiFactoryFlags = 0;
 
@@ -16,20 +16,20 @@ void DX12GraphicsAPI::OnStartUp()
     SetDebugControllerFlags(dxgiFactoryFlags);
   }
 #endif // defined(_DEBUG)
-  
+
   CreateDevice(dxgiFactoryFlags);
-
   CreateCommandQueue();
-
   CreateSwapChain(dxgiFactoryFlags);
-  
-  
+  CreateFrontBackBuffers();
+  CreateCommandAllocator(0);
+  CreateViewport(0);
 }
 
 void DX12GraphicsAPI::OnShutDown()
 {
   m_commandQueue->Release();
   m_device->Release();
+  
 }
 
 void DX12GraphicsAPI::SetDebugControllerFlags(UINT& flags)
@@ -120,7 +120,7 @@ void DX12GraphicsAPI::CreateSwapChain(UINT flags)
   GetClientRect(hWnd, &rect);
   
   DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
-  swapChainDesc.BufferCount = 2;
+  swapChainDesc.BufferCount = SWAPCHAIN_SIZE;
   swapChainDesc.Width = rect.right - rect.left;
   swapChainDesc.Height = rect.bottom - rect.top;
   swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -141,4 +141,96 @@ void DX12GraphicsAPI::CreateSwapChain(UINT flags)
 
   pFactory4->MakeWindowAssociation(hWnd, DXGI_MWA_NO_ALT_ENTER);
 
+}
+
+void DX12GraphicsAPI::CreateFrontBackBuffers()
+{
+  m_frontBackBuffersHeap = CreateDescriptorHeap(SWAPCHAIN_SIZE,
+    D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+  assert(m_frontBackBuffersHeap && "RTVHeap couldn't be created");
+
+  m_srvHeap = CreateDescriptorHeap(1U,
+    D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
+    D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE);
+  assert(m_srvHeap && "SRVHeap couldn't be created");
+
+  CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_frontBackBuffersHeap->getInterfacePtr()->GetCPUDescriptorHandleForHeapStart());
+
+  m_frontBackBuffersHeap->setHandle(rtvHandle);
+
+  //Create BACK AND FRONT BUFFERS
+  for (UINT i = 0; i < m_frontBackBuffersHeap->getResources().size(); ++i)
+  {
+    ID3D12Resource* pResource = m_frontBackBuffersHeap->getResources().at(i);
+
+    m_swapChain->GetBuffer(0, IID_PPV_ARGS(&pResource));
+    m_device->CreateRenderTargetView(pResource,
+      nullptr,
+      m_frontBackBuffersHeap->getHandle());
+
+    m_frontBackBuffersHeap->getResources().at(i) = pResource;
+
+    m_frontBackBuffersHeap->getHandle().Offset(1,
+      m_frontBackBuffersHeap->getDescSize());
+
+  }
+}
+
+void DX12GraphicsAPI::CreateCommandAllocator(UINT flags)
+{
+  HRESULT hr;
+
+  hr = m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocator));
+  if (FAILED(hr))
+  {
+    MessageBoxA(nullptr, "Couldn't Create Command Allocator", MB_OK, MB_ICONERROR);
+    return;
+  }
+}
+
+void DX12GraphicsAPI::CreateViewport(UINT flags)
+{
+  RECT rect;
+  GetClientRect(reinterpret_cast<HWND>(m_hWnd), &rect);
+
+  m_viewport = CD3DX12_VIEWPORT(0.0f,
+                                0.0f,
+                                static_cast<float>(rect.right - rect.left),
+                                static_cast<float>(rect.bottom - rect.top));
+}
+
+
+
+UPtr<mkD3D12DescriptorHeap> DX12GraphicsAPI::CreateDescriptorHeap(UINT numDescriptors,
+                                                                  D3D12_DESCRIPTOR_HEAP_TYPE type,
+                                                                  D3D12_DESCRIPTOR_HEAP_FLAGS flags)
+{
+  HRESULT hr;
+
+  D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
+  rtvHeapDesc.NumDescriptors = numDescriptors;
+  rtvHeapDesc.Type = type;
+  rtvHeapDesc.Flags = flags;
+
+  auto pDescriptorHeap = make_unique<mkD3D12DescriptorHeap>();
+
+  
+
+  hr = m_device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(pDescriptorHeap->getInterface()));
+
+  if (FAILED(hr))
+  {
+    return nullptr;
+  }
+
+  pDescriptorHeap->getResources().resize((size_t)numDescriptors);
+  
+  pDescriptorHeap->setDescSize(m_device->GetDescriptorHandleIncrementSize(type));
+
+  return pDescriptorHeap;
+}
+
+DX12GraphicsAPI& g_dx12GraphicsAPI()
+{
+  return DX12GraphicsAPI::GetInstance();
 }

@@ -1,13 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="inc\GraphicsDevice.h">
+    <ClInclude Include="inc\mkD3D12Device.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="inc\Prerequisites.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="inc\DX12GraphicsAPI.h" />
+    <ClInclude Include="inc\DX12GraphicsAPI.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Renderer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mkD3D12CommandQueue.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mkD3D12SwapChain.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mkD3D12DescriptorHeap.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -15,9 +29,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GraphicsDevice.cpp">
+    <ClCompile Include="src\mkD3D12Device.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\DX12GraphicsAPI.cpp" />
+    <ClCompile Include="src\DX12GraphicsAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mkD3D12CommandQueue.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mkD3D12SwapChain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mkD3D12DescriptorHeap.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

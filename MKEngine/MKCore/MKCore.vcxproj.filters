@@ -4,9 +4,11 @@
     <ClInclude Include="inc\PrerequisitesCore.h" />
     <ClInclude Include="inc\Object.h" />
     <ClInclude Include="inc\SceneObject.h" />
+    <ClInclude Include="inc\mkImage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\SceneObject.cpp" />
+    <ClCompile Include="src\mkImage.cpp" />
   </ItemGroup>
 </Project>
