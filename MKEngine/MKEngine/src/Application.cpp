@@ -1,6 +1,7 @@
 #include "Application.h"
 #include <SDL3/SDL_time.h>
 #include "DX12GraphicsAPI.h"
+#include "DX11GraphicsAPI.h"
 
 Application::Application()
 {
@@ -27,7 +28,7 @@ void Application::Run()
     float deltaTime = frameTime / SDL_GetPerformanceFrequency();
     lastTime = currentTime;
 
-    printf("DeltaTime in MS: %f \n", deltaTime * 1e3f );
+    //printf("DeltaTime in MS: %f \n", deltaTime * 1e3f );
     //printf("FrameTime in MS: %f\r", frameTime / SDL_GetPerformanceFrequency() * 1e3f);
     
 
@@ -65,7 +66,17 @@ void Application::Init()
 
   void* handle = SDL_GetPointerProperty(SDL_GetWindowProperties(m_window), SDL_PROP_WINDOW_WIN32_HWND_POINTER, nullptr);
 
-  DX12GraphicsAPI::StartUp(handle);
+
+
+  if (m_appDesc.graphicsBackend == GraphicsBackend::DX12)
+  {
+    DX12GraphicsAPI::StartUp(handle);
+  }else
+  {
+    DX11GraphicsAPI::StartUp(handle);
+  }
+
+  
 
   //////
   
@@ -85,5 +96,13 @@ void Application::Render()
 
 void Application::Shutdown()
 {
-  DX12GraphicsAPI::ShutDown();
+  if (m_appDesc.graphicsBackend == GraphicsBackend::DX12)
+  {
+    DX12GraphicsAPI::ShutDown();
+  }else
+  {
+    DX11GraphicsAPI::ShutDown();
+  }
+
+  
 }

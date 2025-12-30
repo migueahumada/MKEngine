@@ -2,6 +2,7 @@
 #include <SDL3/SDL.h>
 #include "PrerequisitesCore.h"
 
+
 namespace AudioBackend
 {
   enum E {
@@ -21,7 +22,7 @@ namespace GraphicsBackend
 }
 
 struct APP_DESC {
-
+  GraphicsBackend::E graphicsBackend;
 };
 
 class Application
@@ -43,6 +44,6 @@ class Application
   const uint16 m_height = 720;
   const uint16 m_width = 1080;
   bool m_isFinished = false;
-  
+  APP_DESC m_appDesc {GraphicsBackend::DX11};
 };
 
