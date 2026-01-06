@@ -128,10 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="inc\DX11GraphicsAPI.h" />
+    <ClInclude Include="inc\DX11Renderer.h" />
+    <ClInclude Include="inc\DX11Shader.h" />
     <ClInclude Include="inc\PrerequisitesDX11.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DX11GraphicsAPI.cpp" />
+    <ClCompile Include="src\DX11Renderer.cpp" />
+    <ClCompile Include="src\DX11Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shdrs\SimpleShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

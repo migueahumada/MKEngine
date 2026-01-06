@@ -39,6 +39,8 @@ using int64 = int64_t;
 //***********************STL***********************
 using String = std::string;
 
+using Path = std::wstring;
+
 template<typename K, typename V>
 using Map = std::map<K, V>;
 

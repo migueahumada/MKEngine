@@ -4,11 +4,20 @@
     <ClInclude Include="inc\PrerequisitesCore.h" />
     <ClInclude Include="inc\Object.h" />
     <ClInclude Include="inc\SceneObject.h" />
-    <ClInclude Include="inc\mkImage.h" />
+    <ClInclude Include="inc\mkImage.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\SceneObject.cpp" />
-    <ClCompile Include="src\mkImage.cpp" />
+    <ClCompile Include="src\mkImage.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{5c2e799f-4dd2-4df9-b1c7-337c0b7a8fcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

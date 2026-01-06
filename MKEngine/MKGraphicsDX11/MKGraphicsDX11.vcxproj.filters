@@ -5,9 +5,18 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{4d4bf53f-c050-4313-8654-5e9d8dd172ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DX11GraphicsAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DX11Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DX11Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -18,5 +27,12 @@
     <ClInclude Include="inc\PrerequisitesDX11.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\DX11Renderer.h" />
+    <ClInclude Include="inc\DX11Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shdrs\SimpleShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
